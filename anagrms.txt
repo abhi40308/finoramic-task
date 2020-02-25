@@ -1,0 +1,29 @@
+vector<vector<int> > Solution::anagrams(const vector<string> &strs) {
+
+    vector<vector<int>> ans;
+        if(strs.size() == 0)    return ans;
+        unordered_map<string, vector<int> > p;
+        for(int i = 0; i<strs.size() ; i++){
+            string temp = strs[i];
+            vector<char> tempv;
+            for(int j = 0; j<temp.size() ; j++){
+                tempv.push_back(temp[j]);
+            }
+            sort(tempv.begin(), tempv.end());
+            temp = "";
+            for(int j = 0; j<tempv.size() ; j++){
+                temp += tempv[j];
+            }
+            vector<int> numv;
+            if(p.find(temp) != p.end()){
+                numv = p[temp];
+            }
+            numv.push_back(i+1);
+            p[temp] = numv;
+        }
+        for(auto i : p){
+        
+            ans.push_back(i.second);
+        }
+        return ans;
+}
